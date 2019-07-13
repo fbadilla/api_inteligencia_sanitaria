@@ -1,37 +1,46 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models import Contact, ContactSerializer
+from api.models import Todo, TodoSerializer
 
 """
 The ContactsView will contain the logic on how to:
  GET, POST, PUT or delete the contacts
 """
-class ContactsView(APIView):
-    def get(self, request, contact_id=None):
+class TodoView(APIView):
+    def get(self, request, todo_id=None):
 
-        if contact_id is not None:
-            contact = Contact.objects.get(id=contact_id)
-            serializer = ContactSerializer(contact, many=False)
+        if todo_id is not None:
+            todo = Todo.objects.get(id=todo_id)
+            serializer = TodoSerializer(todo, many=False)
             return Response(serializer.data)
         else:
-            contacts = Contact.objects.all()
-            serializer = ContactSerializer(contacts, many=True)
+            todo = Todo.objects.all()
+            serializer = TodoSerializer(todo, many=True)
             return Response(serializer.data)
 
     def post(self, request):
 
-        serializer = ContactSerializer(data=request.data)
+        serializer = TodoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_420_BAD_REQUEST)
 
 
-    def delete(self, request, contact_id):
+    def delete(self, request, todo_id):
 
-        contact = Contact.objects.get(id=contact_id)
-        contact.delete()
+        todo = Todo.objects.get(id=todo_id)
+        todo.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, todo_id):
+        todo = Todo.objects.get(id=todo_id)
+        serializer = TodoSerializer(todo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_420_BAD_REQUEST)
