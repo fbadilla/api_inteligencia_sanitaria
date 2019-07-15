@@ -10,6 +10,7 @@ Define he Contact Entity into your applcation model
 class Todo(models.Model):
     label = models.CharField(max_length=20, default='')
     done = models.BooleanField(default=False)
+    username = models.CharField(max_length=20, default='')
 """
 The ContactSerializer is where you will specify what properties
 from the ever Contact should be inscuded in the JSON response
@@ -20,4 +21,4 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         # what fields to include?
-        fields = ('id','label', 'done')
+        fields = ('username', 'id','label', 'done')
