@@ -8,9 +8,9 @@ from django.db import models
 Define he Contact Entity into your applcation model
 """
 class Todo(models.Model):
-    label = models.CharField(max_length=20, default='')
-    done = models.BooleanField(default=False)
-    username = models.CharField(max_length=20, default='')
+    title = models.CharField(max_length=20, default='')
+    completed = models.BooleanField(default=False)
+    editing = models.BooleanField(default=False)
 """
 The ContactSerializer is where you will specify what properties
 from the ever Contact should be inscuded in the JSON response
@@ -21,4 +21,4 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         # what fields to include?
-        fields = ('username', 'id','label', 'done')
+        fields = ('id', 'title','completed', 'editing')
