@@ -194,7 +194,7 @@ class CasosRecibiadosView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    def delete(self, request, Estados_id):
+    def delete(self, request, CasosRecibiados_id):
         CasosRecibiados.objects.get(pk=CasosRecibiados_id).delete()
         message = {
             "msg": "borrado"
@@ -232,8 +232,84 @@ class CasosComunasView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    def delete(self, request, Estados_id):
+    def delete(self, request, CasosComunas_id):
         CasosComunas.objects.get(pk=CasosComunas_id).delete()
+        message = {
+            "msg": "borrado"
+        }
+        return Response(message, status=status.HTTP_200_OK)
+
+class CasosEstadoView(APIView):
+    def get(self, request, CasosEstado_id=None):
+        if CasosEstado_id is not None:
+            todos = CasosEstado.objects.filter(pk=CasosEstado_id)
+            serializer = CasosEstadoSerializer(todos, many=True)
+            return Response(serializer.data)
+        else:
+            todos = CasosEstado.objects.all()
+            serializer = CasosEstadoSerializer(todos, many=True)
+            return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CasosEstadoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        CasosEstado.objects.filter(id).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, CasosEstado_id):
+        todo = CasosEstado.objects.get(pk=CasosEstado_id)
+        serializer = CasosEstadoSerializer(todo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, CasosEstado_id):
+        CasosEstado.objects.get(pk=CasosEstado_id).delete()
+        message = {
+            "msg": "borrado"
+        }
+        return Response(message, status=status.HTTP_200_OK)
+       
+class CasosEstadoView(APIView):
+    def get(self, request, CasosEstado_id=None):
+        if CasosEstado_id is not None:
+            todos = CasosEstado.objects.filter(pk=CasosEstado_id)
+            serializer = CasosEstadoSerializer(todos, many=True)
+            return Response(serializer.data)
+        else:
+            todos = CasosEstado.objects.all()
+            serializer = CasosEstadoSerializer(todos, many=True)
+            return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CasosEstadoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        CasosEstado.objects.filter(id).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, CasosEstado_id):
+        todo = CasosEstado.objects.get(pk=CasosEstado_id)
+        serializer = CasosEstadoSerializer(todo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, CasosEstado_id):
+        CasosEstado.objects.get(pk=CasosEstado_id).delete()
         message = {
             "msg": "borrado"
         }
