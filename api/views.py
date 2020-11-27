@@ -116,7 +116,7 @@ class ComunasView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    def delete(self, request, Comunas):
+    def delete(self, request, Comunas_id):
         CasosEnviados.objects.get(pk=Comunas_id).delete()
         message = {
             "msg": "borrado"
