@@ -17,7 +17,7 @@ from the ever Contact should be inscuded in the JSON response
 """
 class CallCenters(models.Model):
     Name_call = models.CharField(max_length=20, default='')
-    Description = models.CharField(auto_now=False, auto_now_add=False,)
+    Description = models.CharField(max_length=50, default='')
     Activo = models.BooleanField(default=True)
 
 class Comunas(models.Model):
